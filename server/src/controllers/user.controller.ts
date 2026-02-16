@@ -34,11 +34,11 @@ async function addFavorites(req: Request, res: Response) {
   }
 }
 
-async function deleteFavorites(req: Request, res: Response) {
-  try {
+// async function deleteFavorites(req: Request, res: Response) {
+//   try {
 
-  }
-}
+//   }
+// }
 
 async function getFavorites(req: Request, res: Response) {
   try {
