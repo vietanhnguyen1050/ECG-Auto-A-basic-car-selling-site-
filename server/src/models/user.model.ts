@@ -18,6 +18,15 @@ const UserSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
+  role: {
+    type: String,
+    enum: ["user", "admin"],
+    default: "user",
+  },
+  refreshToken: {
+    type: String,
+    default: null,
+  },
   valuationhistory: [
     {
       Date: {
@@ -27,11 +36,22 @@ const UserSchema = new mongoose.Schema({
       carid: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Car",
-        
       },
       milage: {
         type: Number,
       },
+    },
+  ],
+  favoritecars: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Car",
+    },
+  ],
+  soldcars: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Car",
     },
   ],
 });

@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { start } from "node:repl";
 
 const CarSchema = new mongoose.Schema({
   brand: {
@@ -101,6 +100,20 @@ const CarSchema = new mongoose.Schema({
   location: {
     type: String,
     enum: ["Hanoi", "Ho Chi Minh City", "Da Nang"],
+  },
+  sold: {
+    type: Boolean,
+    default: false,
+  },
+  seller: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  buyer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    default: null,
   },
 });
 

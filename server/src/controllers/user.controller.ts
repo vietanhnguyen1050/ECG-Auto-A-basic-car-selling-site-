@@ -1,71 +1,73 @@
 import type { Request, Response } from "express";
-import bcrypt from "bcrypt";
 import { User } from "../models/user.model.ts";
+import { getUserAndPopulate } from "../middlewares/user.middleware.ts";
 
-export const SignUp = async (req: Request, res: Response) => {
-  try {
-    debugger;
-    console.log("req", req);
-    const { phonenumber, displayname, email, password } = req.body;
-    if (!phonenumber || !password || !email) {
-      return res
-        .status(400)
-        .json({ message: "Phonenumber, email, and password are required" });
+// Extend Express Request interface to include 'user'
+declare global {
+  namespace Express {
+    interface Request {
+      user?: {
+        userId: string;
+        // add other user properties if needed
+      };
     }
-    if (password.length < 8) {
-      return res
-        .status(400)
-        .json({ message: "Password must be at least 8 characters long" });
-    }
-    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
-      return res.status(400).json({ message: "Invalid email format" });
-    }
-    if (!/^0\d{8,14}$/.test(phonenumber)) {
-      return res.status(400).json({ message: "Invalid phonenumber format" });
-    }
-    if (displayname && displayname.length > 50) {
-      return res
-        .status(400)
-        .json({ message: "Display name cannot exceed 50 characters" });
-    }
-    const existingUser =
-      (await User.findOne({ phonenumber })) || (await User.findOne({ email }));
-    if (existingUser) {
-      return res.status(409).json({
-        message: "User with this phonenumber or email already exists",
-      });
-    }
-    const newUser = await User.create({
-      phonenumber,
-      displayname,
-      email,
-      passworddbhash: await bcrypt.hash(password, 10),
-    });
-    res.status(201).json({ message: "User registered successfully" });
-  } catch (error) {
-    res.status(500).json({ message: "Server error", error });
   }
-};
+}
 
-export const logIn = async (req: Request, res: Response) => {
+async function addFavorites(req: Request, res: Response) {
   try {
-    const { phonenumber, email, password } = req.body;
-    if ((!phonenumber && !email) || !password) {
-      return res
-        .status(400)
-        .json({ message: "Phonenumber or email and password are required" });
+    const userId = req.user?.userId;
+    const { carId } = req.body;
+    const user = await getUserAndPopulate(userId, null)
+
+    if (user.favoritecars.includes(carId)) {
+      user.favoritecars = user.favoritecars.filter(
+        (id) => id.toString() !== carId,
+      );
+    } else {
+      user.favoritecars.push(carId);
     }
-    const user = await User.findOne(
-      phonenumber ? { phonenumber } : { email }
-    ).select("+passwordhash");
+    await user.save();
+    res.status(200).json({ message: "Car added to favorites" });
+  } catch (error: Error | any) {
+    res.status(500).json({ message: "Server error", error: error?.message });
+  }
+}
+
+async function deleteFavorites(req: Request, res: Response) {
+  try {
+
+  }
+}
+
+async function getFavorites(req: Request, res: Response) {
+  try {
+    const userId = req.user?.userId;
+    if (!userId) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+    const user = await User.findById(userId).populate("favoritecars");
     if (!user) {
       return res.status(404).json({ message: "User not found" });
-    } else if (!bcrypt.compareSync(password, user.passworddbhash)) {
-      return res.status(401).json({ message: "Wrong password" });
-    } else {
-      res.status(200).json({ message: "Login successful" });
     }
-  } catch (error) {
-    res.status(500).json({ message: "Server error", error });
+    res.status(200).json({ favoritecars: user.favoritecars });
+  } catch (error: Error | any) {
+    res.status(500).json({ message: "Server error", error: error?.message });
   }
-};
+}
+
+async function getUserInfo(req: Request, res: Response) {
+      try {
+    const userId = req.user?.userId;
+    if (!userId) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+    const user = await User.findById(userId)
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json({ user });
+    } catch (error: Error | any) {
+    res.status(500).json({ message: "Server error", error: error?.message });
+  }}
+
