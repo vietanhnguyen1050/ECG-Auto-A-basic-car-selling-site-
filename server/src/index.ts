@@ -1,6 +1,7 @@
 import express from "express";
 import { ENV } from "./config/environment.ts";
 import { connectDB } from "./config/database.config.ts";
+import authRoutes from "./routes/auth.route.ts";
 import userRoutes from "./routes/user.route.ts";
 
 const app = express();
@@ -12,4 +13,5 @@ app.listen(PORT, () => {
 });
 connectDB();
 
-app.use("/api/users", userRoutes);
+app.use("/ecg/auth", authRoutes);
+app.use("/ecg/user", userRoutes);

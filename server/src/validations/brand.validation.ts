@@ -22,7 +22,7 @@ const correctBrand = yup.object({
                     transmission: yup
                       .string()
                       .required("Transmission is required"),
-                    price: yup.number().required("Price is required"),
+                    originalprice: yup.number().required("Price is required"),
                   }),
                 )
                 .required("Years are required"),
@@ -34,7 +34,7 @@ const correctBrand = yup.object({
     .required("Models are required"),
 });
 
-const createNewBrand = async (data: any) => {
+const validateBrand = async (data: any) => {
   try {
     await correctBrand.validate(data, { abortEarly: false });
   } catch (error) {
@@ -42,15 +42,4 @@ const createNewBrand = async (data: any) => {
   }
 };
 
-const updateExistingBrand = async (data: any) => {
-  try {
-    await correctBrand.validate(data, { abortEarly: false });
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const brandValidation = {
-  createNewBrand,
-  updateExistingBrand,
-};
+export { validateBrand };

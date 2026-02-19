@@ -39,7 +39,18 @@ const CarSchema = new mongoose.Schema({
   },
   condition: {
     type: Number,
+    // 1-5, where 1 is poor and 5 is excellent
     enum: [1, 2, 3, 4, 5],
+  },
+  plate: {
+    color: {
+      type: Number,
+      // 1 White, 2 Yellow, 3 Blue, 4 Red, 5 Foreign, 6 No plate
+      enum: [1, 2, 3, 4, 5, 6],
+    },
+    number: {
+      type: String,
+    },
   },
   startingprice: {
     type: Number,
@@ -76,23 +87,6 @@ const CarSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  comments: [
-    {
-      userid: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-      },
-      comment: {
-        type: String,
-        required: true,
-      },
-      commenttime: {
-        type: Date,
-        required: true,
-      },
-    },
-  ],
   posteddate: {
     type: Date,
     default: Date.now,

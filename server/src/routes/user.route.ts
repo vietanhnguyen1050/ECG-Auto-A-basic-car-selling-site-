@@ -1,10 +1,8 @@
 import express from "express";
-import { SignUp, LogIn, LogOut } from "../controllers/auth.controller.ts";
+import { addFavorites, deleteFavorites, getFavorites, getUserInfo } from "../controllers/user.controller.ts";
 const router = express.Router();
 
-router.route("/signup").post(SignUp);
-router.route("/login").post(LogIn);
-router.route("/logout").post(LogOut);
-
+router.route("/favorites").post(addFavorites).delete(deleteFavorites).get(getFavorites);
+router.route("/info").get(getUserInfo);
 
 export default router;

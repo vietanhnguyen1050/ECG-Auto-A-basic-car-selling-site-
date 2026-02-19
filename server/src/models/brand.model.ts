@@ -6,39 +6,45 @@ const BrandSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  models: [{
-    model: {
-      type: String,
-      required: true,
-    },
-    type: {
-      type: String,
-      required: true,
-    },
-    versions: [{
-      version: {
+  models: [
+    {
+      model: {
         type: String,
         required: true,
       },
-      fuel: {
+      type: {
         type: String,
         required: true,
       },
-      years: [{
-        year: {
-          type: String,
-          required: true,
+      versions: [
+        {
+          version: {
+            type: String,
+            required: true,
+          },
+          fuel: {
+            type: String,
+            required: true,
+          },
+          years: [
+            {
+              year: {
+                type: String,
+                required: true,
+              },
+              transmission: {
+                type: String,
+                required: true,
+              },
+              originalprice: {
+                type: Number,
+                required: true,
+              },
+            },
+          ],
         },
-        transmission: {
-          type: String,
-          required: true,
-        },
-        price: {
-          type: Number,
-          required: true,
-        },
-      }],
-    }],
-  }],
+      ],
+    },
+  ],
 });
 export const Brand = mongoose.model("Brand", BrandSchema);

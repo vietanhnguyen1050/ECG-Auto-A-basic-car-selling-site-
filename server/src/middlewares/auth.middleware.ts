@@ -97,7 +97,9 @@ async function authMiddlewareAdmin(req: any, res: any, next: any) {
     const decoded = verifyAccessToken(token);
     const user = await User.findById(decoded.userid);
     if (!user || user.role !== "admin") {
-      return res.status(403).json({ message: "Admin access required" });
+      return res
+        .status(403)
+        .json({ message: "Admin access required or user not found" });
     }
     req.user = decoded;
     next();
@@ -105,8 +107,14 @@ async function authMiddlewareAdmin(req: any, res: any, next: any) {
     return res.status(401).json({ message: "Invalid or expired token" });
   }
 }
-function logOut(userid: string) {
-  return User.findByIdAndUpdate(userid, { refreshToken: null });
-}
 
-export { giveAccessToken, giveRefreshToken, verifyRefreshToken, authMiddlewareUser, authMiddlewareAdmin, logOut };
+export const token = {
+  giveAccessToken,
+  giveRefreshToken,
+  verifyRefreshToken,
+};
+
+export const authMiddleware = {
+  authMiddlewareUser,
+  authMiddlewareAdmin,
+};
