@@ -7,7 +7,7 @@ const JWT_SECRET_REFRESH = ENV.JWT_SECRET_REFRESH;
 function giveAccessToken(userid: string) {
   if (!JWT_SECRET_ACCESS) {
     throw new Error(
-      "JWT_SECRET_ACCESS is not defined in environment variables",
+      "Thiếu JWT_SECRET_ACCESS trong biến môi trường",
     );
   }
   const accessToken = jwt.sign({ userid }, JWT_SECRET_ACCESS, {
@@ -19,12 +19,12 @@ function giveAccessToken(userid: string) {
 async function giveRefreshToken(userid: string) {
   if (!JWT_SECRET_REFRESH) {
     throw new Error(
-      "JWT_SECRET_REFRESH is not defined in environment variables",
+      "Thiếu JWT_SECRET_REFRESH trong biến môi trường",
     );
   }
   const user = await User.findById(userid);
   if (!user) {
-    throw new Error("User not found");
+    throw new Error("Không tìm thấy người dùng");
   }
   const refreshToken = jwt.sign({ userid }, JWT_SECRET_REFRESH, {
     expiresIn: "7d",
@@ -37,7 +37,7 @@ async function giveRefreshToken(userid: string) {
 function verifyAccessToken(accessToken: string): any {
   if (!JWT_SECRET_ACCESS) {
     throw new Error(
-      "JWT_SECRET_ACCESS is not defined in environment variables",
+      "Thiếu JWT_SECRET_ACCESS trong biến môi trường",
     );
   }
   try {
@@ -51,7 +51,7 @@ function verifyAccessToken(accessToken: string): any {
 async function verifyRefreshToken(refreshToken: string): Promise<any> {
   if (!JWT_SECRET_REFRESH) {
     throw new Error(
-      "JWT_SECRET_REFRESH is not defined in environment variables",
+      "Thiếu JWT_SECRET_REFRESH trong biến môi trường",
     );
   }
   try {
@@ -61,7 +61,7 @@ async function verifyRefreshToken(refreshToken: string): Promise<any> {
     ) as { userid: string };
     const user = await User.findById(decodedRefreshToken.userid);
     if (!user || user.refreshToken !== refreshToken) {
-      throw new Error("Invalid refresh token");
+      throw new Error("Refresh token không hợp lệ");
     }
     return giveAccessToken(decodedRefreshToken.userid);
   } catch (error) {
@@ -74,7 +74,7 @@ function authMiddlewareUser(req: any, res: any, next: any) {
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res
       .status(401)
-      .json({ message: "Authorization header missing or malformed" });
+      .json({ message: "Thiếu header xác thực hoặc sai định dạng" });
   }
   const token = authHeader.split(" ")[1];
   try {
@@ -82,7 +82,7 @@ function authMiddlewareUser(req: any, res: any, next: any) {
     req.user = decoded;
     next();
   } catch (error) {
-    return res.status(401).json({ message: "Invalid or expired token" });
+    return res.status(401).json({ message: "Token không hợp lệ hoặc đã hết hạn" });
   }
 }
 async function authMiddlewareAdmin(req: any, res: any, next: any) {
@@ -90,7 +90,7 @@ async function authMiddlewareAdmin(req: any, res: any, next: any) {
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res
       .status(401)
-      .json({ message: "Authorization header missing or malformed" });
+      .json({ message: "Thiếu header xác thực hoặc sai định dạng" });
   }
   const token = authHeader.split(" ")[1];
   try {
@@ -99,12 +99,12 @@ async function authMiddlewareAdmin(req: any, res: any, next: any) {
     if (!user || user.role !== "admin") {
       return res
         .status(403)
-        .json({ message: "Admin access required or user not found" });
+        .json({ message: "Yêu cầu quyền admin hoặc không tìm thấy người dùng" });
     }
     req.user = decoded;
     next();
   } catch (error) {
-    return res.status(401).json({ message: "Invalid or expired token" });
+    return res.status(401).json({ message: "Token không hợp lệ hoặc đã hết hạn" });
   }
 }
 

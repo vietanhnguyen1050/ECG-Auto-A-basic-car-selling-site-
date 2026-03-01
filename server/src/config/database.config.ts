@@ -3,10 +3,15 @@ import { ENV } from "./environment.ts";
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(ENV.MONGODB_URI as string);
+    if (!ENV.MONGODB_URI) {
+      throw new Error("Thiếu MONGODB_URI trong biến môi trường");
+    }
+
+    await mongoose.connect(ENV.MONGODB_URI);
     console.log("Database connected successfully");
   } catch (error) {
     console.error("Database connection error:", error);
+    throw error;
   }
 };
 const closeDB = async () => {
