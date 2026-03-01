@@ -1,4 +1,4 @@
-import app, { bootstrap } from "../src/index.ts";
+import app, { bootstrap } from "../src/index.js";
 
 await bootstrap();
 
