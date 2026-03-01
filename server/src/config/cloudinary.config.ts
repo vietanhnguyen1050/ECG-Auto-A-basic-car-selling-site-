@@ -1,5 +1,5 @@
 import { v2 as cloudinary } from "cloudinary";
-import { ENV } from "./environment.ts";
+import { ENV } from "./environment.js";
 
 if (ENV.CLOUD_NAME && ENV.CLOUD_API_KEY && ENV.CLOUD_API_SECRET) {
   cloudinary.config({
@@ -11,3 +11,4 @@ if (ENV.CLOUD_NAME && ENV.CLOUD_API_KEY && ENV.CLOUD_API_SECRET) {
 
 
 export { cloudinary };
+

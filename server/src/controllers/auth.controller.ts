@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import bcrypt from "bcrypt";
-import { User } from "../models/user.model.ts";
+import { User } from "../models/user.model.js";
 // Extend Express Request interface to include userId
 declare global {
   namespace Express {
@@ -9,8 +9,8 @@ declare global {
     }
   }
 }
-import { token } from "../middlewares/auth.middleware.ts";
-import { userValidation } from "../validations/user.validation.ts";
+import { token } from "../middlewares/auth.middleware.js";
+import { userValidation } from "../validations/user.validation.js";
 
 async function signUp(req: Request, res: Response) {
   try {

@@ -1,7 +1,7 @@
 import express from "express";
-import { getBidders, getMyBids, placeBid } from "../controllers/bid.controller.ts";
-import { processBiddersForResponse } from "../middlewares/bid.middleware.ts";
-import { authMiddleware } from "../middlewares/auth.middleware.ts";
+import { getBidders, getMyBids, placeBid } from "../controllers/bid.controller.js";
+import { processBiddersForResponse } from "../middlewares/bid.middleware.js";
+import { authMiddleware } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
@@ -10,3 +10,4 @@ router.route("/list").post(getBidders, processBiddersForResponse);
 router.route("/my-bids").get(authMiddleware.authMiddlewareUser, getMyBids);
 
 export default router;
+

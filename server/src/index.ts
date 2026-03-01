@@ -1,15 +1,15 @@
 import express from "express";
 import cors from "cors";
 import path from "node:path";
-import { ENV } from "./config/environment.ts";
-import { connectDB } from "./config/database.config.ts";
-import authRoutes from "./routes/auth.route.ts";
-import userRoutes from "./routes/user.route.ts";
-import carRoutes from "./routes/car.route.ts";
-import brandRoutes from "./routes/brand.route.ts";
-import bidRoutes from "./routes/bid.route.ts";
-import adminRoutes from "./admin/route.ts";
-import { startAuctionSessionMonitor } from "./admin/auction-session.ts";
+import { ENV } from "./config/environment.js";
+import { connectDB } from "./config/database.config.js";
+import authRoutes from "./routes/auth.route.js";
+import userRoutes from "./routes/user.route.js";
+import carRoutes from "./routes/car.route.js";
+import brandRoutes from "./routes/brand.route.js";
+import bidRoutes from "./routes/bid.route.js";
+import adminRoutes from "./admin/route.js";
+import { startAuctionSessionMonitor } from "./admin/auction-session.js";
 
 const app = express();
 const PORT = Number(ENV.PORT) || 3000;

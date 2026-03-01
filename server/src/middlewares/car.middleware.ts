@@ -1,5 +1,5 @@
 import { match } from "node:assert";
-import { Brand } from "../models/brand.model.ts";
+import { Brand } from "../models/brand.model.js";
 
 class UnsupportedCarModelError extends Error {
   constructor(message = "The model is not supported by the company") {
@@ -228,3 +228,4 @@ export {
   calculatePrice,
   formatPlateNumber,
 };
+

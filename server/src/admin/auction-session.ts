@@ -1,4 +1,4 @@
-import { Car } from "../models/car.model.ts";
+import { Car } from "../models/car.model.js";
 
 async function closeExpiredAuctionSessions() {
   const now = new Date();
@@ -44,3 +44,4 @@ function startAuctionSessionMonitor(intervalMs = 30000) {
 }
 
 export { closeExpiredAuctionSessions, startAuctionSessionMonitor };
+

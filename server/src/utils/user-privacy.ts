@@ -1,7 +1,7 @@
 import type { Request } from "express";
 import jwt from "jsonwebtoken";
-import { ENV } from "../config/environment.ts";
-import { User } from "../models/user.model.ts";
+import { ENV } from "../config/environment.js";
+import { User } from "../models/user.model.js";
 
 type ViewerContext = {
   userId?: string;

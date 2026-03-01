@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
-import { Car } from "../models/car.model.ts";
-import { validateBid, validateGetBidders } from "../validations/bid.validation.ts";
-import { withPlateColorLabel } from "../utils/plate-color.ts";
+import { Car } from "../models/car.model.js";
+import { validateBid, validateGetBidders } from "../validations/bid.validation.js";
+import { withPlateColorLabel } from "../utils/plate-color.js";
 
 async function placeBid(req: Request, res: Response) {
 	try {
@@ -174,4 +174,5 @@ async function getMyBids(req: Request, res: Response) {
 }
 
 export { placeBid, getBidders, getMyBids };
+
 

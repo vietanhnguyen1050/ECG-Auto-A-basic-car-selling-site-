@@ -1,10 +1,10 @@
 import type { Request, Response } from "express";
 import { Readable } from "node:stream";
-import { Brand } from "../models/brand.model.ts";
-import { Car } from "../models/car.model.ts";
-import { User } from "../models/user.model.ts";
-import { cloudinary } from "../config/cloudinary.config.ts";
-import { withPlateColorLabel } from "../utils/plate-color.ts";
+import { Brand } from "../models/brand.model.js";
+import { Car } from "../models/car.model.js";
+import { User } from "../models/user.model.js";
+import { cloudinary } from "../config/cloudinary.config.js";
+import { withPlateColorLabel } from "../utils/plate-color.js";
 import {
 	validateId,
 	validateStartAuction,
@@ -12,7 +12,7 @@ import {
 	validateUpdateBrand,
 	validateUpdateCar,
 	validateUpdateUserRole,
-} from "./validation.ts";
+} from "./validation.js";
 
 const noEditStatuses = ["Sold", "Cancelled", "Rejected", "Cancel request"];
 const allowedStartAuctionStatuses = [
@@ -648,3 +648,4 @@ export {
 	deleteUserAdmin,
 	deleteCarAdmin,
 };
+

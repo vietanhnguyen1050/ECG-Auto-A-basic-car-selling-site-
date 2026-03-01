@@ -1,6 +1,6 @@
 import express from "express";
-import { signUp, logIn, logOut, refreshAccessToken, getMe, updateProfile, changePassword } from "../controllers/auth.controller.ts";
-import { authMiddleware } from "../middlewares/auth.middleware.ts";
+import { signUp, logIn, logOut, refreshAccessToken, getMe, updateProfile, changePassword } from "../controllers/auth.controller.js";
+import { authMiddleware } from "../middlewares/auth.middleware.js";
 const router = express.Router();
 
 router.route("/signup").post(signUp);

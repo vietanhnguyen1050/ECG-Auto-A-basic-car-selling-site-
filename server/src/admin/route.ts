@@ -14,9 +14,9 @@ import {
 	updateBrandAdmin,
 	updateCarAdmin,
 	updateUserRoleAdmin,
-} from "./controller.ts";
-import { authMiddleware } from "../middlewares/auth.middleware.ts";
-import { uploadSellCarImages } from "../middlewares/upload.middleware.ts";
+} from "./controller.js";
+import { authMiddleware } from "../middlewares/auth.middleware.js";
+import { uploadSellCarImages } from "../middlewares/upload.middleware.js";
 
 const router = express.Router();
 
@@ -40,3 +40,4 @@ router.route("/cars/:carId/start-auction").patch(startAuctionSessionAdmin);
 router.route("/brands/:brandId").put(updateBrandAdmin);
 
 export default router;
+

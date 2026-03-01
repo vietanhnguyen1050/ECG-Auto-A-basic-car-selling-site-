@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
-import { User } from "../models/user.model.ts";
-import { getUserAndPopulate } from "../middlewares/user.middleware.ts";
+import { User } from "../models/user.model.js";
+import { getUserAndPopulate } from "../middlewares/user.middleware.js";
 
 async function addFavorites(req: Request, res: Response) {
   try {

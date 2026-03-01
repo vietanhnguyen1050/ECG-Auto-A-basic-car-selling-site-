@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
-import { ENV } from "../config/environment.ts";
-import { User } from "../models/user.model.ts";
+import { ENV } from "../config/environment.js";
+import { User } from "../models/user.model.js";
 const JWT_SECRET_ACCESS = ENV.JWT_SECRET_ACCESS;
 const JWT_SECRET_REFRESH = ENV.JWT_SECRET_REFRESH;
 
@@ -118,3 +118,4 @@ export const authMiddleware = {
   authMiddlewareUser,
   authMiddlewareAdmin,
 };
+

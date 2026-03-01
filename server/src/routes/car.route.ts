@@ -6,9 +6,9 @@ import {
 	evaluateCar,
 	getMyListings,
 	sellCarRequest,
-} from "../controllers/car.controller.ts";
-import { parseSellCarPayload, uploadSellCarImages } from "../middlewares/upload.middleware.ts";
-import { authMiddleware } from "../middlewares/auth.middleware.ts";
+} from "../controllers/car.controller.js";
+import { parseSellCarPayload, uploadSellCarImages } from "../middlewares/upload.middleware.js";
+import { authMiddleware } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
@@ -22,3 +22,4 @@ router.route("/:carId/cancel").patch(authMiddleware.authMiddlewareUser, cancelSe
 router.route("/:carId").get(getCarById);
 
 export default router;
+

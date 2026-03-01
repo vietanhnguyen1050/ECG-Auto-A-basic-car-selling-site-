@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllBrands } from "../controllers/brand.controller.ts";
+import { getAllBrands } from "../controllers/brand.controller.js";
 
 const router = express.Router();
 

@@ -1,7 +1,7 @@
-import { connectDB, closeDB } from "../config/database.config.ts";
-import { Brand } from "../models/brand.model.ts";
-import { Car } from "../models/car.model.ts";
-import { branddata, cardata } from "./uploaddata.ts";
+import { connectDB, closeDB } from "../config/database.config.js";
+import { Brand } from "../models/brand.model.js";
+import { Car } from "../models/car.model.js";
+import { branddata, cardata } from "./uploaddata.js";
 
 async function seedBrands() {
   const operations = branddata.map((brand) => ({
@@ -70,3 +70,4 @@ async function runSeed() {
 }
 
 runSeed();
+

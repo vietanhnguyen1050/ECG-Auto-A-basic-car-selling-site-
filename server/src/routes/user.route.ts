@@ -1,6 +1,6 @@
 import express from "express";
-import { addFavorites, deleteFavorites, getFavorites, getUserInfo } from "../controllers/user.controller.ts";
-import { authMiddleware } from "../middlewares/auth.middleware.ts";
+import { addFavorites, deleteFavorites, getFavorites, getUserInfo } from "../controllers/user.controller.js";
+import { authMiddleware } from "../middlewares/auth.middleware.js";
 const router = express.Router();
 
 router.use(authMiddleware.authMiddlewareUser);

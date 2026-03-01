@@ -1,18 +1,18 @@
 import type { Request, Response } from "express";
 import mongoose from "mongoose";
 import { Readable } from "node:stream";
-import { Car } from "../models/car.model.ts";
-import { validateSellCarRequest } from "../validations/car.validation.ts";
-import { withPlateColorLabel } from "../utils/plate-color.ts";
-import { redactUserForViewer, resolveViewerContext } from "../utils/user-privacy.ts";
-import { cloudinary } from "../config/cloudinary.config.ts";
-import { closeExpiredAuctionSessions } from "../admin/auction-session.ts";
+import { Car } from "../models/car.model.js";
+import { validateSellCarRequest } from "../validations/car.validation.js";
+import { withPlateColorLabel } from "../utils/plate-color.js";
+import { redactUserForViewer, resolveViewerContext } from "../utils/user-privacy.js";
+import { cloudinary } from "../config/cloudinary.config.js";
+import { closeExpiredAuctionSessions } from "../admin/auction-session.js";
 import {
   UnsupportedCarModelError,
   getModelInfo,
   calculatePrice,
   formatPlateNumber,
-} from "../middlewares/car.middleware.ts";
+} from "../middlewares/car.middleware.js";
 
 const visibleProgress = [
   "Verified",
@@ -352,3 +352,4 @@ export {
   cancelSellCarRequest,
   getMyListings,
 };
+

@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import { redactUserForViewer, resolveViewerContext } from "../utils/user-privacy.ts";
+import { redactUserForViewer, resolveViewerContext } from "../utils/user-privacy.js";
 
 async function processBiddersForResponse(req: Request, res: Response, next: NextFunction) {
 	try {
@@ -33,3 +33,4 @@ async function processBiddersForResponse(req: Request, res: Response, next: Next
 export {
 	processBiddersForResponse,
 };
+

@@ -1,4 +1,4 @@
-import { User } from "../models/user.model.ts";
+import { User } from "../models/user.model.js";
 
 async function getUserAndPopulate(userId: any, population: any) {
   try {
@@ -21,3 +21,4 @@ async function getUserAndPopulate(userId: any, population: any) {
 }
 
 export { getUserAndPopulate };
+
