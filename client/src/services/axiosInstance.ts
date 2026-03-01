@@ -5,7 +5,13 @@
 import axios from 'axios';
 import { clearAuthTokens, getAccessToken } from '@/lib/authTokens';
 
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/ecg';
+const baseUrlFromEnv = import.meta.env.VITE_API_URL?.trim();
+
+if (!baseUrlFromEnv) {
+  throw new Error('Thiếu biến môi trường VITE_API_URL trong client/.env');
+}
+
+const BASE_URL = baseUrlFromEnv;
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
